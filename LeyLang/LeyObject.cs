@@ -7,9 +7,9 @@ namespace LeyLang {
         public LeyObject(LeyClass klass) : base(LeyPrimitiveType.ObjectReference,klass.Name) {
             Klass = klass;
 
-            InstanceVars = new Dictionary<string, LeyValueWithType>();
+            _instanceVars = new Dictionary<string, LeyValueWithType>();
             foreach(KeyValuePair<string,string> kvp in klass.InstanceVarTypes) {
-                InstanceVars.Add(kvp.Key, new LeyValueWithType(kvp.Value));
+                _instanceVars.Add(kvp.Key, new LeyValueWithType(kvp.Value));
             }
         }
 
@@ -18,6 +18,17 @@ namespace LeyLang {
         }
 
         public LeyClass Klass { get; }
-        public Dictionary<string,LeyValueWithType> InstanceVars { get; }
+        private Dictionary<string,LeyValueWithType> _instanceVars { get; }
+
+        public LeyValueWithType GetVarWithType(string varName) {
+            return _instanceVars[varName];
+        }
+        public T GetVar<T>(string varName) where T : LeyValue {
+            return _instanceVars[varName].Value as T;
+        }
+
+        public void SetVar(string varName, LeyValue varValue) {
+            _instanceVars[varName].Set(varValue);
+        }
     }
 }

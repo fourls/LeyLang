@@ -5,25 +5,13 @@ using System.Text;
 
 namespace LeyLang {
     public static class Executor {
-        public static void Execute(ProgramNode astRoot) {
-            Exec.Program program = Exec.Program.Create(astRoot);
+        private static void GenerateStdLib() {
             Lookup.ResetInstance();
             Lookup lookup = Lookup.Instance;
 
-            //lookup.QuickDeclareFunc(
-            //    "NumToStr",
-            //    new LeyExternFunc(
-            //        new LeyFuncParam[] { new LeyFuncParam("msg", LeyTypeUtility.Number) },
-            //        LeyTypeUtility.String,
-            //        (args) => {
-            //            return new LeyString((args[0] as LeyNumber).Value.ToString());
-            //        }
-            //    )
-            //);
-
             lookup.DeclareFunc(
                 "WriteStr",
-                LeyExternFunc.FastCreateExtern(typeof(Console).GetMethod("WriteLine",new Type[] {typeof(string)}))
+                LeyExternFunc.FastCreateExtern(typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) }))
             );
 
             lookup.DeclareFunc(
@@ -62,6 +50,52 @@ namespace LeyLang {
                 )
             );
 
+            lookup.DeclareClass(new LeyClass(
+                "Person",
+                new Dictionary<string, string>() {
+                    ["name"] = LeyTypeUtility.String,
+                    ["age"] = LeyTypeUtility.Number,
+                    ["gender"] = LeyTypeUtility.String,
+                    ["alive"] = LeyTypeUtility.Bool,
+                    ["partner"] = "Person"
+                },
+                new LeyExternFunc(
+                    new LeyFuncParam[] {
+                        new LeyFuncParam("this","Person"),
+                        new LeyFuncParam("name",LeyTypeUtility.String),
+                        new LeyFuncParam("age",LeyTypeUtility.Number),
+                        new LeyFuncParam("gender",LeyTypeUtility.String),
+                        new LeyFuncParam("alive",LeyTypeUtility.Bool),
+                        new LeyFuncParam("partner","Person"),
+                    },
+                    "Person",
+                    (args) => {
+                        LeyObject thisObj = args[0] as LeyObject;
+                        thisObj.SetVar("name", args[1]);
+                        thisObj.SetVar("age", args[2]);
+                        thisObj.SetVar("gender", args[3]);
+                        thisObj.SetVar("alive", args[4]);
+                        thisObj.SetVar("partner", args[5]);
+                        return thisObj;
+                    }
+                ),
+                new Dictionary<string, LeyFunc>() {
+                    ["IsAdult"] = new LeyExternFunc(
+                        new LeyFuncParam[] { new LeyFuncParam("this","Person") },
+                        LeyTypeUtility.Bool,
+                        (args) => {
+                            LeyObject thisObj = args[0] as LeyObject;
+
+                            return new LeyBool((thisObj.GetVar<LeyNumber>("age").Value > 18));
+                        }
+                    )
+                }
+            ));
+        }
+
+        public static void Execute(ProgramNode astRoot) {
+            Exec.Program program = Exec.Program.Create(astRoot);
+            GenerateStdLib();
             program.Execute();
         }
     }

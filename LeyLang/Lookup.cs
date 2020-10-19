@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace LeyLang {
@@ -29,6 +30,10 @@ namespace LeyLang {
             Vars = new VarManagement();
             Funcs = new Dictionary<int, LeyFunc>();
             CustomClasses = new Dictionary<string, LeyClass>();
+        }
+
+        public void DeclareClass(LeyClass klass) {
+            CustomClasses.Add(klass.Name, klass);
         }
 
         public int DeclareFunc(string funcName, LeyFunc func=null) {
