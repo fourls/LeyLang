@@ -1,0 +1,25 @@
+﻿
+
+//class Person(n: string, a: number, ptnr: Person) {
+//	let name: string = n;
+//	let age: number = a;
+//	let gender: string = "male";
+//	let partner: Person = ptnr;
+//
+//	func IsAdult(): bool {
+//		return age >= 18;
+//	}
+//
+//	func GetPartner(): Person {
+//		return partner;
+//	}
+//}
+
+let brian: Person = Person("Brian",19,null);
+let aaron: Person = Person("Aaron",17,brian);
+
+brian.IsAdult();
+aaron.age;
+aaron.partner.name;
+aaron.partner.IsAdult();
+aaron.GetPartner().age;

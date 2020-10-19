@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang.AST {
-    public class CallExprNode : ExprNode {
+    public class CallExprNode : IdentifierExprNode {
         public string MethodName { get; }
         public List<ExprNode> Arguments { get; }
 

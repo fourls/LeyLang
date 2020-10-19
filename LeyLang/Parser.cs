@@ -391,12 +391,12 @@ namespace LeyLang {
         }
 
         // '<func>(<args>...)' or '<var>'
-        private ExprNode ParseIdentifierExpr() {
+        private IdentifierExprNode ParseIdentifierExpr() {
             ValidateToken(TokenKind.Identifier);
 
             string idName = _curTok.StringValue;
 
-            GetNextToken();
+            GetNextToken(); // eat identifier
 
             if(_curTok.StringValue != "(") { // not a function call
                 return new VarExprNode(idName);
@@ -423,9 +423,23 @@ namespace LeyLang {
             return new CallExprNode(idName, args);
         }
 
+        private IdentifierChainExprNode ParseIdentifierChainExpr() {
+            List<IdentifierExprNode> exprs = new List<IdentifierExprNode>();
+
+            while(true) {
+                exprs.Add(ParseIdentifierExpr());
+                if (_curTok.StringValue == ".")
+                    GetNextToken(); // eat '.'
+                else
+                    break;
+            };
+
+            return new IdentifierChainExprNode(exprs);
+        }
+
         private ExprNode ParsePrimaryExpr() {
             if (_curTok.Kind == TokenKind.Identifier)
-                return ParseIdentifierExpr();
+                return ParseIdentifierChainExpr();
 
             if (_curTok.Kind == TokenKind.NumberLiteral || _curTok.StringValue == "-")
                 return ParseNumberExpr();

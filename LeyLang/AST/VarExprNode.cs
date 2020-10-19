@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang.AST {
-    public class VarExprNode : ExprNode {
+    public class VarExprNode : IdentifierExprNode {
         public string Name { get; }
 
         public VarExprNode(string name) {
