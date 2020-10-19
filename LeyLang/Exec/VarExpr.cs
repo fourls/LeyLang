@@ -12,7 +12,7 @@ namespace LeyLang.Exec {
         }
 
         public override LeyValue CalculateValue() {
-            return ExecLookup.Instance.Vars.GetVar(_varName).Value;
+            return Lookup.Instance.Vars.GetVar(_varName).Value;
         }
 
         public static VarExpr Create(AST.VarExprNode astVarExpr) {

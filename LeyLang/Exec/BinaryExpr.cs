@@ -127,7 +127,7 @@ namespace LeyLang.Exec {
             if(varName == null)
                 throw new LeyException("Must assign to a variable.");
 
-            var leyVar = ExecLookup.Instance.Vars.GetVar(varName);
+            var leyVar = Lookup.Instance.Vars.GetVar(varName);
 
             if(!rhsVal.IsLeyType(leyVar.Type))
                 throw new LeyException("Type mismatch in variable assignment.");

@@ -21,14 +21,14 @@ namespace LeyLang.Exec {
         }
 
         public override LeyValue CalculateValue() {
-            var funcRefValue = ExecLookup.Instance.Vars.GetVar(_funcName).Value;
+            var funcRefValue = Lookup.Instance.Vars.GetVar(_funcName).Value;
 
             if (funcRefValue.PrimitiveType != LeyPrimitiveType.FunctionReference)
                 throw new LeyException("Function call attempted on non-function variable.");
 
             int funcRef = (funcRefValue as LeyFuncRef).Value;
 
-            LeyFunc func = ExecLookup.Instance.Funcs[funcRef];
+            LeyFunc func = Lookup.Instance.Funcs[funcRef];
 
             if (func == null)
                 throw new LeyException("Function was not defined.");

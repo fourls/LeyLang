@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang {
-    public class ExecLookup {
-        private static ExecLookup _singleton;
+    public class Lookup {
+        private static Lookup _singleton;
 
-        public static ExecLookup Instance {
+        public static Lookup Instance {
             get {
                 if (_singleton == null)
-                    _singleton = new ExecLookup();
+                    _singleton = new Lookup();
 
                 return _singleton;
             }
         }
 
         public static void ResetInstance() {
-            _singleton = new ExecLookup();
+            _singleton = new Lookup();
         }
 
         public VarManagement Vars { get; }
@@ -25,7 +25,7 @@ namespace LeyLang {
 
         private Random _random;
 
-        private ExecLookup() {
+        private Lookup() {
             Vars = new VarManagement();
             Funcs = new Dictionary<int, LeyFunc>();
             CustomClasses = new Dictionary<string, LeyClass>();

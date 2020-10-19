@@ -23,7 +23,7 @@ namespace LeyLang.Exec {
             if (value == null)
                 throw new LeyException("Attempted assignment of variable to undefined value.");
 
-            ExecLookup.Instance.Vars.GetVar(_varName).Set(value);
+            Lookup.Instance.Vars.GetVar(_varName).Set(value);
         }
 
         public static VarDeclarationStatement Create(AST.VarDeclarationStatementNode astDeclStmt) {

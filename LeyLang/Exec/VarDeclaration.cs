@@ -16,7 +16,7 @@ namespace LeyLang.Exec {
             if (!LeyTypeUtility.IsTypeValid(_varType))
                 throw new LeyException($"Variable '{_varName}' has nonexistent type '{_varType}'.");
 
-            ExecLookup.Instance.Vars.DeclareVar(_varName, _varType);
+            Lookup.Instance.Vars.DeclareVar(_varName, _varType);
         }
 
         public static VarDeclaration Create(AST.VarDeclarationNode astDecl) {

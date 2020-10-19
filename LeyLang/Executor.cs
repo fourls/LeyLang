@@ -7,8 +7,8 @@ namespace LeyLang {
     public static class Executor {
         public static void Execute(ProgramNode astRoot) {
             Exec.Program program = Exec.Program.Create(astRoot);
-            ExecLookup.ResetInstance();
-            ExecLookup lookup = ExecLookup.Instance;
+            Lookup.ResetInstance();
+            Lookup lookup = Lookup.Instance;
 
             //lookup.QuickDeclareFunc(
             //    "NumToStr",
@@ -55,7 +55,7 @@ namespace LeyLang {
                     new LeyFuncParam[0],
                     LeyTypeUtility.Undefined,
                     (args) => {
-                        ExecLookup.Instance.Vars.PrettyPrint();
+                        Lookup.Instance.Vars.PrettyPrint();
 
                         return null;
                     }

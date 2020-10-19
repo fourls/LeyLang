@@ -16,8 +16,8 @@ namespace LeyLang.Exec {
             int index = _proto.Execute();
 
             if(_body != null) {
-                LeyFunc func = ExecLookup.Instance.Funcs[index];
-                ExecLookup.Instance.Funcs[index] = func.ToCustomFunc(_body);
+                LeyFunc func = Lookup.Instance.Funcs[index];
+                Lookup.Instance.Funcs[index] = func.ToCustomFunc(_body);
             }
         }
 

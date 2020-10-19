@@ -20,8 +20,8 @@ namespace LeyLang.Exec {
         }
 
         public int Execute() {
-            int index = ExecLookup.Instance.DeclareFunc(_funcName);
-            ExecLookup.Instance.Funcs[index] = new LeyPlaceholderFunc(_params, _returnType);
+            int index = Lookup.Instance.DeclareFunc(_funcName);
+            Lookup.Instance.Funcs[index] = new LeyPlaceholderFunc(_params, _returnType);
 
             return index;
         }

@@ -17,7 +17,7 @@ namespace LeyLang {
                 type == Bool ||
                 type == String ||
                 type == FuncRef ||
-                ExecLookup.Instance.CustomClasses.ContainsKey(type)
+                Lookup.Instance.CustomClasses.ContainsKey(type)
             );
         }
 
@@ -34,8 +34,8 @@ namespace LeyLang {
             if (type == String) return new LeyString();
             if (type == FuncRef) return new LeyFuncRef();
 
-            if(ExecLookup.Instance.CustomClasses.ContainsKey(type)) {
-                return new LeyObject(ExecLookup.Instance.CustomClasses[type]);
+            if(Lookup.Instance.CustomClasses.ContainsKey(type)) {
+                return new LeyObject(Lookup.Instance.CustomClasses[type]);
             }
 
             throw new LeyException("Cannot create instance of non-existent Ley type.");

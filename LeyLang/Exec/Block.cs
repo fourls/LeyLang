@@ -23,34 +23,34 @@ namespace LeyLang.Exec {
         }
 
         public void Execute() {
-            ExecLookup.Instance.Vars.EnterScope();
+            Lookup.Instance.Vars.EnterScope();
 
             try {
                 ExecuteStatements();
             } catch(FakeException e) {
-                ExecLookup.Instance.Vars.ExitScope();
+                Lookup.Instance.Vars.ExitScope();
                 throw e;
             }
 
-            ExecLookup.Instance.Vars.ExitScope();
+            Lookup.Instance.Vars.ExitScope();
         }
 
         public void Execute(Dictionary<string,LeyValue> injectedVars) {
-            ExecLookup.Instance.Vars.EnterScope();
+            Lookup.Instance.Vars.EnterScope();
 
             foreach(var kvp in injectedVars) {
-                ExecLookup.Instance.Vars.DeclareVar(kvp.Key, kvp.Value.Type, kvp.Value);
+                Lookup.Instance.Vars.DeclareVar(kvp.Key, kvp.Value.Type, kvp.Value);
             }
 
             try {
                 ExecuteStatements();
             }
             catch (FakeException e) {
-                ExecLookup.Instance.Vars.ExitScope();
+                Lookup.Instance.Vars.ExitScope();
                 throw e;
             }
 
-            ExecLookup.Instance.Vars.ExitScope();
+            Lookup.Instance.Vars.ExitScope();
         }
     }
 }
