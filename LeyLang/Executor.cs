@@ -21,50 +21,35 @@ namespace LeyLang {
             //    )
             //);
 
-            lookup.QuickDeclareFunc(
-                "BoolToStr",
-                new LeyExternFunc(
-                    new LeyFuncParam[] { new LeyFuncParam("msg", LeyTypeUtility.Number) },
-                    LeyTypeUtility.String,
-                    (args) => {
-                        return new LeyString((args[0] as LeyBool).Value.ToString());
-                    }
-                )
-            );
-
-            lookup.QuickDeclareFunc(
+            lookup.DeclareFunc(
                 "WriteStr",
-                LeyExternFunc.GenerateLeyFunc(typeof(Console).GetMethod("WriteLine",new Type[] {typeof(string)}))
+                LeyExternFunc.FastCreateExtern(typeof(Console).GetMethod("WriteLine",new Type[] {typeof(string)}))
             );
 
-            lookup.QuickDeclareFunc(
+            lookup.DeclareFunc(
                 "ReadStr",
-                LeyExternFunc.GenerateLeyFunc(typeof(Console).GetMethod("ReadLine", new Type[0]))
+                LeyExternFunc.FastCreateExtern(typeof(Console).GetMethod("ReadLine", new Type[0]))
             );
 
             Func<decimal, string> numToStr = x => x.ToString();
-            lookup.QuickDeclareFunc(
+            lookup.DeclareFunc(
                 "NumToStr",
-                LeyExternFunc.GenerateLeyFunc(numToStr, numToStr.Target)
+                LeyExternFunc.FastCreateExtern(numToStr, numToStr.Target)
             );
 
-            lookup.QuickDeclareFunc(
+            Func<string, decimal> strToNum = x => decimal.Parse(x);
+            lookup.DeclareFunc(
                 "StrToNum",
-                new LeyExternFunc(
-                    new LeyFuncParam[] { new LeyFuncParam("prompt", LeyTypeUtility.String) },
-                    LeyTypeUtility.Number,
-                    (args) => {
-                        string str = (args[0] as LeyString).Value;
-
-                        if (decimal.TryParse(str, out decimal result))
-                            return new LeyNumber(result);
-                        else
-                            return new LeyNumber(0);
-                    }
-                )
+                LeyExternFunc.FastCreateExtern(strToNum, strToNum.Target)
             );
 
-            lookup.QuickDeclareFunc(
+            Func<bool, string> boolToStr = x => x.ToString();
+            lookup.DeclareFunc(
+                "BoolToStr",
+                LeyExternFunc.FastCreateExtern(boolToStr, boolToStr.Target)
+            );
+
+            lookup.DeclareFunc(
                 "DebugVars",
                 new LeyExternFunc(
                     new LeyFuncParam[0],

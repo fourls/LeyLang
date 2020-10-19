@@ -21,7 +21,10 @@ namespace LeyConsole {
         }
 
         static void Main(string[] args) {
-            StreamReader reader = new StreamReader(@"C:\Users\Elliot\source\repos\LeyLang\LeyConsole\Samples\basic.txt");
+            string path = args[0].ToString();
+            if (!File.Exists(path)) 
+                throw new FileNotFoundException("Sample file does not exist.");
+            StreamReader reader = new StreamReader(args[0].ToString());
 
             Lexer lexer = new Lexer(reader);
 

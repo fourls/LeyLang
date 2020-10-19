@@ -19,6 +19,7 @@ func print(msg: string): number {
 
 while(true) {
 	print("====================================");
-	let n: number = StrToNum(ReadStr("Input a number"));
+	print("Enter a number.");
+	let n: number = StrToNum(ReadStr());
 	print("The " + NumToStr(n) + "th Fibonacci number is " + NumToStr(fib(n)));
 }

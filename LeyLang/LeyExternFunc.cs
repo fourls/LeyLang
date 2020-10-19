@@ -24,7 +24,7 @@ namespace LeyLang {
             return _externToLeyType.ContainsKey(externType) ? _externToLeyType[externType] : externType.Name;
         }
 
-        public static LeyExternFunc GenerateLeyFunc(MethodInfo externMethod, object target=null) {
+        public static LeyExternFunc FastCreateExtern(MethodInfo externMethod, object target=null) {
             string returnValue = ExternToLeyType(externMethod.ReturnType);
             var externParams = externMethod.GetParameters();
 
@@ -59,8 +59,8 @@ namespace LeyLang {
             return new LeyExternFunc(leyParams, returnValue, func);
         }
 
-        public static LeyExternFunc GenerateLeyFunc(Delegate dele, object target) {
-            return GenerateLeyFunc(dele.GetMethodInfo(), target);
+        public static LeyExternFunc FastCreateExtern(Delegate dele, object target) {
+            return FastCreateExtern(dele.GetMethodInfo(), target);
         }
     }
 }

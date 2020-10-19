@@ -31,7 +31,7 @@ namespace LeyLang {
             CustomClasses = new Dictionary<string, LeyClass>();
         }
 
-        public int QuickDeclareFunc(string funcName, LeyFunc func=null) {
+        public int DeclareFunc(string funcName, LeyFunc func=null) {
             if (_random == null) _random = new Random();
 
             int funcIndex;
