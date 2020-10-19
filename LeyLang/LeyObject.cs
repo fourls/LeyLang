@@ -30,5 +30,9 @@ namespace LeyLang {
         public void SetVar(string varName, LeyValue varValue) {
             _instanceVars[varName].Set(varValue);
         }
+
+        public LeyValue CallMethod(string methodName, LeyValue[] args) {
+            return Klass.CallMethod(this, args,methodName);
+        }
     }
 }

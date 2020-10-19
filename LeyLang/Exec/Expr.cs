@@ -11,6 +11,10 @@ namespace LeyLang.Exec {
             if (astExpr is AST.BinaryExprNode astBinaryExpr)
                 return BinaryExpr.Create(astBinaryExpr);
 
+            // identifier chain expression
+            if (astExpr is AST.IdentifierChainExprNode astChainExpr)
+                return IdentifierChainExpr.Create(astChainExpr);
+
             // variable expression
             if (astExpr is AST.VarExprNode astVarExpr)
                 return VarExpr.Create(astVarExpr);

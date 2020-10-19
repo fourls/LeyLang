@@ -9,8 +9,10 @@ func Difference(x: number, y: number): number {
 
 
 while(true) {
-	let x: number = StrToNum(ReadStr("Type first number."));
-	let y: number = StrToNum(ReadStr("Type second number."));
+	WriteStr("Type first number:");
+	let x: number = StrToNum(ReadStr());
+	WriteStr("Type second number:");
+	let y: number = StrToNum(ReadStr());
 	let diff: number = Difference(x, y);
 	WriteStr("Difference is " + NumToStr(diff));
 	

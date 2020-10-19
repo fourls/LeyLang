@@ -121,18 +121,14 @@ namespace LeyLang.Exec {
         public BinaryExprAssign(AST.BinaryExprNode astExpr) : base(astExpr) { }
 
         protected override LeyValue DoOperation() {
-            var varName = (_lhs as VarExpr)?.VarName;
+            var identifierChain = (_lhs as IdentifierChainExpr);
             var rhsVal = _rhs.CalculateValue();
 
-            if(varName == null)
+            if(identifierChain == null)
                 throw new LeyException("Must assign to a variable.");
 
-            var leyVar = Lookup.Instance.Vars.GetVar(varName);
+            identifierChain.SetVar(rhsVal);
 
-            if(!rhsVal.IsLeyType(leyVar.Type))
-                throw new LeyException("Type mismatch in variable assignment.");
-
-            leyVar.Set(rhsVal);
             return rhsVal;
         }
     }

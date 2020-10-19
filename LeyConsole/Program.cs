@@ -34,9 +34,9 @@ namespace LeyConsole {
 
             LeyLang.AST.ProgramNode program = parser.ParseProgram();
 
-            Console.WriteLine(program.PrettyPrint(0));
+            //Console.WriteLine(program.PrettyPrint(0));
 
-            //Executor.Execute(program);
+            Executor.Execute(program);
 
             Console.ReadLine();
         }

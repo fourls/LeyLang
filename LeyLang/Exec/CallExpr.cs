@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang.Exec {
-    public class CallExpr : Expr {
+    public class CallExpr : IdentifierExpr {
         private string _funcName;
         private Expr[] _args;
 
@@ -39,6 +39,16 @@ namespace LeyLang.Exec {
             }
 
             return func.Invoke(calcedArgs);
+        }
+
+        public override LeyValue CalculateValue(LeyObject callee) {
+
+            LeyValue[] calcedArgs = new LeyValue[_args.Length];
+            for (int i = 0; i < _args.Length; i++) {
+                calcedArgs[i] = _args[i].CalculateValue();
+            }
+
+            return callee.CallMethod(_funcName, calcedArgs);
         }
     }
 }

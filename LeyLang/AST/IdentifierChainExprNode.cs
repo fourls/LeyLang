@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang.AST {
-    class IdentifierChainExprNode : ExprNode {
+    public class IdentifierChainExprNode : ExprNode {
         public List<IdentifierExprNode> Exprs { get; }
 
         public IdentifierChainExprNode(List<IdentifierExprNode> exprs) {
