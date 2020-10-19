@@ -34,6 +34,7 @@ namespace LeyLang {
 
         public void DeclareClass(LeyClass klass) {
             CustomClasses.Add(klass.Name, klass);
+            DeclareFunc(klass.Name, klass.Constructor);
         }
 
         public int DeclareFunc(string funcName, LeyFunc func=null) {

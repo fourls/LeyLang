@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang {
-    class VarTable {
+    public class VarTable {
         private Dictionary<string, LeyValueWithType> _variables = new Dictionary<string, LeyValueWithType>();
 
         public bool ContainsVar(string varName) {

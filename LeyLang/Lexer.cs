@@ -51,6 +51,8 @@ namespace LeyLang {
                     case "while": return new Token(TokenKind.While);
                     case "break": return new Token(TokenKind.Break);
                     case "continue": return new Token(TokenKind.Continue);
+                    case "class": return new Token(TokenKind.Class);
+                    case "null": return new Token(TokenKind.Null);
                     case "true": return new Token(TokenKind.BoolLiteral,true);
                     case "false": return new Token(TokenKind.BoolLiteral,false);
                     default: return new Token(TokenKind.Identifier,identifierStr);

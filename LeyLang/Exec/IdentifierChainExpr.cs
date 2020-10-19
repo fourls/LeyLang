@@ -23,7 +23,7 @@ namespace LeyLang.Exec {
         private LeyObject GetCallee() {
             LeyObject currentObj = null;
             for (int i = 0; i < _exprs.Length - 1; i++) {
-                currentObj = _exprs[i].CalculateValue(currentObj) as LeyObject;
+                currentObj = (currentObj == null ? _exprs[i].CalculateValue() : _exprs[i].CalculateValue(currentObj)) as LeyObject;
 
                 if (currentObj == null)
                     throw new LeyException($"Dot operator used on non-object at position {i} in a chain of {_exprs.Length}.");

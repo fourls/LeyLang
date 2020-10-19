@@ -8,8 +8,8 @@ namespace LeyLang {
             Klass = klass;
 
             _instanceVars = new Dictionary<string, LeyValueWithType>();
-            foreach(KeyValuePair<string,string> kvp in klass.InstanceVarTypes) {
-                _instanceVars.Add(kvp.Key, new LeyValueWithType(kvp.Value));
+            foreach(KeyValuePair<string,LeyInstanceVarInfo> kvp in klass.InstanceVars) {
+                _instanceVars.Add(kvp.Key, new LeyValueWithType(kvp.Value.Type,kvp.Value.DefaultValue));
             }
         }
 

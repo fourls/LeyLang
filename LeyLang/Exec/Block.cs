@@ -35,6 +35,10 @@ namespace LeyLang.Exec {
             Lookup.Instance.Vars.ExitScope();
         }
 
+        public void ExecuteScopeless() {
+            ExecuteStatements();
+        }
+
         public void Execute(Dictionary<string,LeyValue> injectedVars) {
             Lookup.Instance.Vars.EnterScope();
 

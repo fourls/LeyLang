@@ -15,5 +15,7 @@
         Return,
         Break,
         Continue,
+        Class,
+        Null,
     }
 }

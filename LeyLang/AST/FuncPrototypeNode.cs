@@ -4,17 +4,17 @@ using System.Text;
 
 namespace LeyLang.AST {
     public class FuncPrototypeNode : Node {
-        public FuncPrototypeNode(string funcName, string returnType, List<FuncPrototypeParameterNode> parameters) {
-            FuncName = funcName;
+        public FuncPrototypeNode(string protoName, string returnType, List<PrototypeParameterNode> parameters) {
+            ProtoName = protoName;
             ReturnType = returnType;
             Parameters = parameters;
         }
 
-        public string FuncName { get; }
+        public string ProtoName { get; }
         public string ReturnType { get; }
-        public List<FuncPrototypeParameterNode> Parameters { get; }
+        public List<PrototypeParameterNode> Parameters { get; }
 
         protected override Node[] ChildNodes => Parameters.ToArray();
-        protected override string PrettyNodeContents => $"[FuncPrototype name='{FuncName}']";
+        protected override string PrettyNodeContents => $"[FuncPrototype name='{ProtoName}' returnType='{ReturnType}']";
     }
 }

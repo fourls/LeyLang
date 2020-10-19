@@ -6,9 +6,10 @@ using System.Reflection;
 namespace LeyLang {
     public class LeyExternFunc : LeyFunc {
         private static Dictionary<Type, string> _externToLeyType = new Dictionary<Type, string>() {
-            [typeof(decimal)] = "number",
-            [typeof(string)] = "string",
-            [typeof(bool)] = "bool",
+            [typeof(decimal)] = LeyTypeUtility.Number,
+            [typeof(string)] = LeyTypeUtility.String,
+            [typeof(bool)] = LeyTypeUtility.Bool,
+            [typeof(void)] = LeyTypeUtility.Void
         };
 
         private Func<LeyValue[], LeyValue> _func;
@@ -27,7 +28,7 @@ namespace LeyLang {
         public static LeyExternFunc FastCreateExtern(MethodInfo externMethod, object target=null) {
             string returnValue = ExternToLeyType(externMethod.ReturnType);
             var externParams = externMethod.GetParameters();
-
+            
             var leyParams = new LeyFuncParam[externParams.Length];
 
             for (int i = 0; i < externParams.Length; i++) {

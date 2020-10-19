@@ -17,6 +17,10 @@ namespace LeyLang {
             return _tables.Count > index ? _tables[index] : null;
         }
 
+        public VarTable GetCurrentTable() {
+            return GetTableAt(_currentScope);
+        }
+
         public LeyValueWithType GetVar(string varName) {
             for(int i = _currentScope; i >= 0; i--) {
                 var table = GetTableAt(i);

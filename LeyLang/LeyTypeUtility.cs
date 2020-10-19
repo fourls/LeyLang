@@ -9,6 +9,7 @@ namespace LeyLang {
         public static string String = "string";
         public static string FuncRef = "funcref";
         public static string Undefined = "undefined";
+        public static string Void = "void";
         public static string Object(LeyClass klass) => klass.Name;
 
         public static bool IsTypeValid(string type) {

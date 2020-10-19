@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LeyLang.AST {
-    public class FuncPrototypeParameterNode : Node {
-        public FuncPrototypeParameterNode(string paramType, string paramName) {
+    public class PrototypeParameterNode : Node {
+        public PrototypeParameterNode(string paramType, string paramName) {
             ParamType = paramType;
             ParamName = paramName;
         }

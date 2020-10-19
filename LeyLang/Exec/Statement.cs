@@ -25,6 +25,8 @@ namespace LeyLang.Exec {
                 return BreakStatement.Create(breakStmt);
             if (stmt is AST.ContinueStatementNode contStmt)
                 return ContinueStatement.Create(contStmt);
+            if (stmt is AST.ClassStatementNode classStmt)
+                return ClassStatement.Create(classStmt);
 
             throw new Exception("Unknown AST statement node encountered.");
         }

@@ -162,6 +162,8 @@ namespace LeyLang {
                 return ParseForStatement();
             if (_curTok.Kind == TokenKind.Func)
                 return ParseFuncStatement();
+            if (_curTok.Kind == TokenKind.Class)
+                return ParseClassStatement();
             if (_curTok.Kind == TokenKind.Return)
                 return ParseReturnStatement();
             if (_curTok.Kind == TokenKind.Break)
@@ -170,6 +172,20 @@ namespace LeyLang {
                 return ParseContinueStatement();
 
             return ParseExprStatement();
+        }
+
+        private ClassStatementNode ParseClassStatement() {
+            ValidateToken(TokenKind.Class);
+            GetNextToken(); // eat 'class'
+            ValidateToken(TokenKind.Identifier);
+
+            string className = _curTok.StringValue;
+
+            GetNextToken(); // eat class name
+
+            var block = ParseBlock();
+
+            return new ClassStatementNode(className, block);
         }
 
         private FuncStatementNode ParseFuncStatement() {
@@ -181,7 +197,6 @@ namespace LeyLang {
 
         private FuncPrototypeNode ParseFuncPrototype() {
             ValidateToken(TokenKind.Func);
-
             GetNextToken(); // eat 'func'
             ValidateToken(TokenKind.Identifier);
 
@@ -191,7 +206,7 @@ namespace LeyLang {
             ValidateToken("(");
             GetNextToken(); // eat '('
 
-            List<FuncPrototypeParameterNode> protoParams = new List<FuncPrototypeParameterNode>();
+            List<PrototypeParameterNode> protoParams = new List<PrototypeParameterNode>();
 
             if(_curTok.StringValue != ")") {
                 while (true) {
@@ -207,7 +222,7 @@ namespace LeyLang {
 
                     string paramType = _curTok.StringValue;
 
-                    protoParams.Add(new FuncPrototypeParameterNode(paramType, paramName));
+                    protoParams.Add(new PrototypeParameterNode(paramType, paramName));
 
                     GetNextToken(); // eat param type
 

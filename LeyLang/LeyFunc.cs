@@ -13,10 +13,11 @@ namespace LeyLang {
         public string ReturnValue { get; }
 
         public LeyValue Invoke(LeyValue[] arguments) {
-            Validate(arguments);
+            ValidateArgs(arguments);
 
             var result = OnInvoke(arguments);
 
+            ValidateResult(result);
             return result;
         }
 
@@ -24,14 +25,23 @@ namespace LeyLang {
             return LeyTypeUtility.DefaultOfType(ReturnValue);
         }
 
-        private void Validate(LeyValue[] arguments) {
+        private void ValidateArgs(LeyValue[] arguments) {
             if (Params.Length != arguments.Length)
                 throw new LeyException($"Ley func expected {Params.Length} arguments, but received {arguments.Length}.");
 
             for(int i = 0; i < Params.Length; i++) {
                 if (!arguments[i].IsLeyType(Params[i].ParamType))
-                    throw new LeyException($"Ley func expected type {Params[i].ParamType}, but received incompatible type (primitive: {arguments[i].PrimitiveType}).");
+                    throw new LeyException($"Ley func expected type {Params[i].ParamType}, but received incompatible type {arguments[i].Type}.");
             }
+        }
+
+        private void ValidateResult(LeyValue result) {
+            if (ReturnValue == LeyTypeUtility.Void && result == null) {
+                return;
+            }
+
+            if (result == null || !result.IsLeyType(ReturnValue))
+                throw new LeyException($"Ley func expected to return type {ReturnValue}, but returned incompatible type {result?.Type}.");
         }
 
         public LeyCustomFunc ToCustomFunc(Exec.Block block) {

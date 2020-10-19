@@ -1,25 +1,39 @@
 ﻿
 
-//class Person(n: string, a: number, ptnr: Person) {
-//	let name: string = n;
-//	let age: number = a;
-//	let gender: string = "male";
-//	let partner: Person = ptnr;
-//
-//	func IsAdult(): bool {
-//		return age >= 18;
-//	}
-//
-//	func GetPartner(): Person {
-//		return partner;
-//	}
-//}
+class Person {
+	let name: string = "Default";
+	let age: number = -5;
+	let gender: string = "male";
 
-let brian: Person = Person("Brian",19,null);
-let aaron: Person = Person("Aaron",17,brian);
+	func init(self: Person, name: string, age: number, gender: string): void {
+		self.name = name;
+		self.age = age;
+		self.gender = gender;
+	}
 
-brian.IsAdult();
-aaron.age;
-aaron.partner.name;
-aaron.partner.IsAdult();
-aaron.GetPartner().age;
+	func IsAdult(self: Person): bool {
+		return self.age >= 18;
+	}
+
+	func Introduce(self: Person): void {
+		let adultSentence: string = "I am not an adult yet.";
+		if(self.IsAdult()) {
+			adultSentence = "I am an adult.";
+		}
+		WriteStr("I'm " + self.name + " and I'm a " + NumToStr(self.age) + "yo " + self.gender + ". " + adultSentence);
+	}
+
+	func SayHiTo(self: Person, person: Person): void {
+		WriteStr("Hi " + person.name + "!");
+		self.Introduce();
+		WriteStr("Who are you?");
+	}
+}
+
+let brian: Person = Person();
+brian.init("Brian",17,"male");
+let aaron: Person = Person();
+aaron.init("Aaron",19,"male");
+
+brian.SayHiTo(aaron);
+aaron.SayHiTo(brian);
