@@ -1,0 +1,43 @@
+﻿let time_waited: number = StrToNum(ReadStr("How many minutes do you wait for?"));
+
+for(let i: number = 0; i < time_waited; i = i + 1) {
+	let resp: string = ReadStr(NumToStr(i) + ". You wait...");
+
+	if(resp == "break") {
+		break;
+	}
+
+	if(resp == "continue") {
+		continue;
+	}
+
+	WriteStr("A minute passes.");
+}
+
+let time_comment: string = "";
+
+if(time_waited > 30) {
+	time_comment = "Sorry, you've been waiting here over half an hour! ";
+}
+
+let name: string = ReadStr(time_comment + "Hi, I'm the bouncer. What's your name?");
+let first_time: bool = true;
+
+while(name != "Jeff") {
+	if(first_time == false) {
+		name = ReadStr("Do you have another name you go by?");
+	} else {
+		first_time = false;
+	}
+
+	if(name == "Jeff") {
+		WriteStr(name + " is allowed here.");
+	} else if(name == "Terry") {
+		WriteStr(name + " is banned from these premises.");
+		break;
+	} else {
+		WriteStr("Sorry, " + name + ", I don't know you.");
+	}
+}
+
+WriteStr("* End *");

@@ -1,0 +1,24 @@
+﻿func fib(n: number): number {
+
+	if(n <= 1) {
+		return n;
+	} else {
+		let minus1: number = fib(n - 1);
+
+		let minus2: number = fib(n - 2);
+
+		return minus1 + minus2;
+	}
+}
+
+func print(msg: string): number {
+	WriteStr(msg);
+
+	return 0;
+}
+
+while(true) {
+	print("====================================");
+	let n: number = StrToNum(ReadStr("Input a number"));
+	print("The " + NumToStr(n) + "th Fibonacci number is " + NumToStr(fib(n)));
+}

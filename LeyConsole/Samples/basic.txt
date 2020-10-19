@@ -1,0 +1,8 @@
+﻿let my_name: string = "George";
+let my_age: number = 15;
+
+WriteStr("My name is " + my_name + " and I am " + NumToStr(my_age));
+
+my_age = 16;
+
+WriteStr("I am now " + NumToStr(my_age));

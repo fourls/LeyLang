@@ -1,0 +1,18 @@
+﻿// cool function! i like it
+func Difference(x: number, y: number): number {
+	if(x > y) {
+		return x - y;
+	} else {
+		return y - x;
+	}
+}
+
+
+while(true) {
+	let x: number = StrToNum(ReadStr("Type first number."));
+	let y: number = StrToNum(ReadStr("Type second number."));
+	let diff: number = Difference(x, y);
+	WriteStr("Difference is " + NumToStr(diff));
+	
+	DebugVars();
+}
